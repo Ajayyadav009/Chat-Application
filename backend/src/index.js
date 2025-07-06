@@ -1,15 +1,20 @@
-import express from 'express'; 
- import dotenv from 'dotenv';
+import express from "express";
+import dotenv from "dotenv";
 
-import authRoutes from './routes/auth.routes.js';
- doteenv.config();
- 
+import authRoutes from "./routes/auth.routes.js";
+import { connectDB } from "./lib/db.js";
+dotenv.config();
+
 const app = express();
-app.use("/api/auth", authRoutes);
-app.get('/', (req, res) => {
-    res.send("Welcome to the Chat Application API");
-})
-app.listen(5000, () => {
-    console.log('server is running on port', 5000);
+const PORT = process.env.PORT
 
-})
+app.use(express.json());
+
+
+app.use("/api/auth", authRoutes);
+
+app.listen(PORT, () => {
+  console.log("server is running on port", PORT);
+
+  connectDB();
+});
