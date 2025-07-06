@@ -1,6 +1,9 @@
-import express from 'express';
-import authRoutes from './routes/auth.routes.js';
+import express from 'express'; 
+ import dotenv from 'dotenv';
 
+import authRoutes from './routes/auth.routes.js';
+ doteenv.config();
+ 
 const app = express();
 app.use("/api/auth", authRoutes);
 app.get('/', (req, res) => {
